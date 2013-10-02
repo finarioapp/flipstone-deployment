@@ -5,7 +5,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   namespace :appserver_rainbows do
     desc "Create wrapper for executing the app"
     task :wrapper do
-      sudo "rvm wrapper 1.9.3 #{application} #{current_path}/bin/rainbows"
+      sudo "rvm wrapper 1.9.3-p448 #{application} #{current_path}/bin/rainbows"
     end
 
     desc "Executable to be put in upstart configuration"
