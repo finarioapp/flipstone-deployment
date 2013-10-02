@@ -5,7 +5,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   namespace :appserver_zbatery do
     desc "Create wrapper for executing the app"
     task :wrapper do
-      sudo "rvm wrapper 1.9.2 #{application} #{current_path}/bin/zbatery"
+      sudo "rvm wrapper 1.9.3 #{application} #{current_path}/bin/zbatery"
     end
 
     desc "Executable to be put in upstart configuration"

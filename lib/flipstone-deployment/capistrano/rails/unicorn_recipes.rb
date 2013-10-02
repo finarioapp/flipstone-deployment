@@ -5,7 +5,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   namespace :appserver_unicorn do
     desc "Create wrapper for executing the app"
     task :wrapper do
-      sudo "rvm wrapper 1.9.2 #{application} #{current_path}/bin/unicorn"
+      sudo "rvm wrapper 1.9.3 #{application} #{current_path}/bin/unicorn"
     end
 
     desc "Executable to be put in upstart configuration"
