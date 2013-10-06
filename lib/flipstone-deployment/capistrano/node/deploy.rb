@@ -51,7 +51,7 @@ Capistrano::Configuration.instance(:must_exist).load do
     end
 
     task :start do
-      sudo "start #{application}"
+      sudo "RUBY_GC_MALLOC_LIMIT=41000000 start #{application}"
     end
   end
 

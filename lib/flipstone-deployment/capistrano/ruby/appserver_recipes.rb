@@ -33,6 +33,11 @@ Capistrano::Configuration.instance(:must_exist).load do
     task :port do
       appserver_namespace.port
     end
+
+    desc "sets environment variables for ruby Garbage Collection"
+    task :ruby_gc_params do
+      appserver_namespace.ruby_gc_params
+    end
   end
 
   namespace :deploy do
@@ -63,6 +68,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   before 'upstart:install_application', "appserver:wrapper"
   before 'upstart:install_application', "appserver:config"
   before 'deploy:migrations', 'deploy:web:disable'
+  after 'upstart:install_application', "appserver:ruby_gc_params"
   after 'deploy:migrations', 'deploy:web:enable'
   after 'deploy:migrations', 'deploy:cleanup'
   after 'deploy', 'deploy:cleanup'
