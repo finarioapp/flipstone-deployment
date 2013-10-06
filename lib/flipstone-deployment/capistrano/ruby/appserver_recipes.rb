@@ -68,7 +68,7 @@ Capistrano::Configuration.instance(:must_exist).load do
   before 'upstart:install_application', "appserver:wrapper"
   before 'upstart:install_application', "appserver:config"
   before 'deploy:migrations', 'deploy:web:disable'
-  after 'upstart:install_application', "appserver:ruby_gc_params"
+  before 'upstart:install_application', "appserver:ruby_gc_params"
   after 'deploy:migrations', 'deploy:web:enable'
   after 'deploy:migrations', 'deploy:cleanup'
   after 'deploy', 'deploy:cleanup'

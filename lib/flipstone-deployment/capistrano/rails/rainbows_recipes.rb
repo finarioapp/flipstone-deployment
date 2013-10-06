@@ -11,7 +11,6 @@ Capistrano::Configuration.instance(:must_exist).load do
     desc "sets environment variables for ruby Garbage Collection"
     task :ruby_gc_params do
       run "export RUBY_GC_MALLOC_LIMIT=40000000"
-      run "export RUBY_GC_MALLOC_LIMIT=50000000"
       run "export RUBY_FREE_MIN=10000"
     end
 
