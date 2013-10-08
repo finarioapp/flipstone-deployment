@@ -35,8 +35,8 @@ Capistrano::Configuration.instance(:must_exist).load do
     end
 
     desc "sets environment variables for ruby Garbage Collection"
-    task :ruby_gc_params do
-      appserver_namespace.ruby_gc_params
+    task :set_ruby_gc_params do
+      appserver_namespace.set_ruby_gc_params
     end
   end
 
