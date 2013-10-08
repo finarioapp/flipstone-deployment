@@ -9,9 +9,14 @@ Capistrano::Configuration.instance(:must_exist).load do
     end
 
     desc "sets environment variables for ruby Garbage Collection"
-    task :ruby_gc_params do
-      run "export RUBY_GC_MALLOC_LIMIT=40000000"
-      run "export RUBY_FREE_MIN=10000"
+    task :set_ruby_gc_params do
+      match_gc_params = ruby_gc_settings.keys.join("|")
+      env_file = "#{f2_rvm_path}/environments/ruby-#{rvm_ruby_string}"
+
+      run "sudo cp #{env_file} #{env_file}.bak && awk '!/#{match_gc_params}/' #{env_file}.bak | sudo tee #{env_file}"
+      ruby_gc_settings.each do |key, value|
+        sudo %{awk 'BEGIN {print "#{key}=#{value}; export #{key}" >> "#{env_file}"}'}
+      end
     end
 
     desc "Executable to be put in upstart configuration"
