@@ -19,8 +19,8 @@ Capistrano::Configuration.instance(:must_exist).load do
   end
 
   before 'deploy:update_code', 'install_deploy_keys'
-  before 'deploy:symlink', 'appserver:config'
-  before 'deploy:symlink', 'logrotate:config'
+  before 'deploy:create_symlink', 'appserver:config'
+  before 'deploy:create_symlink', 'logrotate:config'
 
   set :deployment_safeword, 'set deployment_safeword to change this value'
   task :sanity_check do
