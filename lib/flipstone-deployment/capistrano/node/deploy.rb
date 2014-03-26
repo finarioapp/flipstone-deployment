@@ -23,7 +23,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       run "rm -rf #{current_path}/log"
       run "ln -sf #{shared_path}/log #{current_path}/log"
     end
-    after 'deploy:create_symlink', 'deploy:symlink_log'
+    after 'deploy:symlink', 'deploy:symlink_log'
 
     task :update_code, :except => { :no_release => true } do
       on_rollback { run "rm -rf #{release_path}; true" }
