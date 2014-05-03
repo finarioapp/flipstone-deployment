@@ -13,7 +13,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       match_gc_params = ruby_gc_settings.keys.join("|")
       env_file = "#{f2_rvm_path}/environments/ruby-#{rvm_ruby_string}"
 
-      run "sudo cp #{env_file} #{env_file}.bak && awk '!/#{match_gc_params}/' #{env_file}.bak | sudo tee #{env_file}"
+      sudo "cp #{env_file} #{env_file}.bak && awk '!/#{match_gc_params}/' #{env_file}.bak | sudo tee #{env_file}"
       ruby_gc_settings.each do |key, value|
         sudo %{awk 'BEGIN {print "#{key}=#{value}; export #{key}" >> "#{env_file}"}'}
       end
